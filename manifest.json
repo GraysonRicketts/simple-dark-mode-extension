@@ -1,10 +1,11 @@
 {
   "manifest_version": 3,
   "name": "Dark Mode",
-  "version": "1.0",
+  "version": "0.1.0",
   "description": "Toggle dark mode on any page with one click.",
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": "icons/bulb-lit.svg"
   },
   "permissions": ["activeTab", "scripting"]
 }
