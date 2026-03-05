@@ -31,7 +31,16 @@ function toggleDarkMode(intensity = 100) {
     style.remove();
     return false;
   }
-  setDarkModeIntensity(intensity);
+  const invertValue = intensity / 100;
+  const el = document.createElement('style');
+  el.id = 'dark-reader-style';
+  el.textContent = `
+    html { filter: invert(${invertValue}) hue-rotate(180deg) !important; }
+    img, video, iframe, canvas, picture, svg image {
+      filter: invert(${invertValue}) hue-rotate(180deg) !important;
+    }
+  `;
+  document.head.appendChild(el);
   return true;
 }
 
