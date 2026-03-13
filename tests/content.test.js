@@ -7,11 +7,15 @@
 
 function setDarkModeIntensity(intensity) {
   const invertValue = intensity / 100;
+  const isGoogleDocs = window.location.hostname === 'docs.google.com';
+  const mediaSelector = isGoogleDocs
+    ? 'img, video, iframe, picture, svg image'
+    : 'img, video, iframe, canvas, picture, svg image';
   const style = document.getElementById('dark-reader-style');
   if (style) {
     style.textContent = `
       html { filter: invert(${invertValue}) hue-rotate(180deg) !important; }
-      img, video, iframe, canvas, picture, svg image {
+      ${mediaSelector} {
         filter: invert(${invertValue}) hue-rotate(180deg) !important;
       }
     `;
@@ -20,7 +24,7 @@ function setDarkModeIntensity(intensity) {
     el.id = 'dark-reader-style';
     el.textContent = `
       html { filter: invert(${invertValue}) hue-rotate(180deg) !important; }
-      img, video, iframe, canvas, picture, svg image {
+      ${mediaSelector} {
         filter: invert(${invertValue}) hue-rotate(180deg) !important;
       }
     `;
@@ -36,11 +40,15 @@ function toggleDarkMode(intensity = 100) {
     return false;
   }
   const invertValue = intensity / 100;
+  const isGoogleDocs = window.location.hostname === 'docs.google.com';
+  const mediaSelector = isGoogleDocs
+    ? 'img, video, iframe, picture, svg image'
+    : 'img, video, iframe, canvas, picture, svg image';
   const el = document.createElement('style');
   el.id = 'dark-reader-style';
   el.textContent = `
     html { filter: invert(${invertValue}) hue-rotate(180deg) !important; }
-    img, video, iframe, canvas, picture, svg image {
+    ${mediaSelector} {
       filter: invert(${invertValue}) hue-rotate(180deg) !important;
     }
   `;
@@ -139,5 +147,30 @@ describe('setDarkModeIntensity', () => {
     const css = document.getElementById('dark-reader-style').textContent;
     expect(css).toContain('img, video, iframe, canvas, picture, svg image');
     expect(css).toContain('invert(0.75)');
+  });
+});
+
+describe('on Google Docs', () => {
+  beforeEach(() => {
+    delete window.location;
+    window.location = new URL('https://docs.google.com/document/d/abc');
+    document.head.innerHTML = '';
+  });
+
+  afterEach(() => {
+    delete window.location;
+    window.location = new URL('about:blank');
+  });
+
+  test('toggleDarkMode does not counter-invert canvas', () => {
+    toggleDarkMode();
+    const css = document.getElementById('dark-reader-style').textContent;
+    expect(css).not.toContain('canvas');
+  });
+
+  test('setDarkModeIntensity does not counter-invert canvas', () => {
+    setDarkModeIntensity(100);
+    const css = document.getElementById('dark-reader-style').textContent;
+    expect(css).not.toContain('canvas');
   });
 });

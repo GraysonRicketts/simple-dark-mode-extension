@@ -1,10 +1,14 @@
 function setDarkModeIntensity(intensity) {
   const invertValue = intensity / 100;
+  const isGoogleDocs = window.location.hostname === 'docs.google.com';
+  const mediaSelector = isGoogleDocs
+    ? 'img, video, iframe, picture, svg image'
+    : 'img, video, iframe, canvas, picture, svg image';
   const style = document.getElementById('dark-reader-style');
   if (style) {
     style.textContent = `
       html { filter: invert(${invertValue}) hue-rotate(180deg) !important; }
-      img, video, iframe, canvas, picture, svg image {
+      ${mediaSelector} {
         filter: invert(${invertValue}) hue-rotate(180deg) !important;
       }
     `;
@@ -13,7 +17,7 @@ function setDarkModeIntensity(intensity) {
     el.id = 'dark-reader-style';
     el.textContent = `
       html { filter: invert(${invertValue}) hue-rotate(180deg) !important; }
-      img, video, iframe, canvas, picture, svg image {
+      ${mediaSelector} {
         filter: invert(${invertValue}) hue-rotate(180deg) !important;
       }
     `;
@@ -29,11 +33,15 @@ function toggleDarkMode(intensity = 100) {
     return false;
   }
   const invertValue = intensity / 100;
+  const isGoogleDocs = window.location.hostname === 'docs.google.com';
+  const mediaSelector = isGoogleDocs
+    ? 'img, video, iframe, picture, svg image'
+    : 'img, video, iframe, canvas, picture, svg image';
   const el = document.createElement('style');
   el.id = 'dark-reader-style';
   el.textContent = `
     html { filter: invert(${invertValue}) hue-rotate(180deg) !important; }
-    img, video, iframe, canvas, picture, svg image {
+    ${mediaSelector} {
       filter: invert(${invertValue}) hue-rotate(180deg) !important;
     }
   `;
