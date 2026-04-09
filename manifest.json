@@ -8,5 +8,6 @@
     "default_icon": "icons/bulb-lit.svg"
   },
   "background": { "service_worker": "background.js" },
-  "permissions": ["activeTab", "scripting"]
+  "permissions": ["activeTab", "scripting", "storage", "webNavigation"],
+  "host_permissions": ["<all_urls>"]
 }

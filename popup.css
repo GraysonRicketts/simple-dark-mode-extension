@@ -118,3 +118,110 @@ button:active {
   min-width: 45px;
   text-align: right;
 }
+
+#url-list {
+  margin-top: 12px;
+}
+
+.url-list-header {
+  font-size: 11px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 6px 0;
+}
+
+.url-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  background: white;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.url-label {
+  flex: 1;
+  font-size: 12px;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.url-badge {
+  width: auto;
+  padding: 2px 6px;
+  margin-bottom: 0;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  border-radius: 3px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.url-badge:hover {
+  opacity: 0.75;
+}
+
+.url-badge:active {
+  transform: none;
+}
+
+.url-badge.on {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.url-badge.off {
+  background: #fce4ec;
+  color: #c62828;
+}
+
+.url-edit,
+.url-remove {
+  width: auto;
+  padding: 0 4px;
+  margin-bottom: 0;
+  background: none;
+  border: none;
+  color: #bbb;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: none;
+  flex-shrink: 0;
+}
+
+.url-edit:hover,
+.url-remove:hover {
+  background: #f0f0f0;
+  color: #555;
+}
+
+.url-edit:active,
+.url-remove:active {
+  background: #e0e0e0;
+  transform: none;
+}
+
+.url-remove {
+  font-size: 16px;
+}
+
+.url-edit-input {
+  flex: 1;
+  font-size: 12px;
+  font-family: inherit;
+  padding: 1px 4px;
+  border: 1px solid #4CAF50;
+  border-radius: 3px;
+  outline: none;
+  min-width: 0;
+}
